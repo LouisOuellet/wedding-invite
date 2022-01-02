@@ -4,11 +4,5 @@
   Deny from all
 </Files>
 
-# Protect cli.php
-<Files "cli.php">
-  Order Allow,Deny
-  Deny from all
-</Files>
-
 # Disable directory browsing
 Options All -Indexes
