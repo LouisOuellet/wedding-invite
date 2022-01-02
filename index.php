@@ -62,9 +62,8 @@
   <link rel="stylesheet" title="default" href="/dist/css/default.css">
   <!-- extended CSS -->
   <link rel="stylesheet" title="default" href="/dist/css/wedding.css">
+  <!-- JQuery -->
   <script src="./vendor/jquery/jquery.min.js"></script>
-  <!-- Popper JS -->
-  <!-- <script src="./vendor/popper/popper.min.js"></script> -->
   <!-- TimeAgo JS -->
   <script src="./vendor/timeago/jquery.timeago.js"></script>
   <!-- Bootstrap 4 -->
@@ -137,14 +136,15 @@
   <script src="./vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
   <!-- dropzonejs -->
   <script src="./vendor/dropzone/min/dropzone.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="./dist/js/adminlte.min.js"></script>
-  <!-- extended CSS -->
-  <script src="./dist/js/framework.js"></script>
-  <!-- extended CSS -->
-  <script src="./dist/js/wedding.js"></script>
+  <!-- whatwg-fetch -->
 	<script>window.fetch = undefined;</script>
   <script src="./vendor/whatwg-fetch/fetch.umd.js"></script>
+  <!-- AdminLTE App -->
+  <script src="./dist/js/adminlte.min.js"></script>
+  <!-- extended JS -->
+  <script src="./dist/js/framework.js"></script>
+  <!-- App JS -->
+  <script src="./dist/js/wedding.js"></script>
 </head>
 <body class="hold-transition pace-warning dark-mode content-background">
   <div class="events-content-wrapper events-background row m-0 align-items-center text-center justify-content-center">
