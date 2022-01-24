@@ -4,7 +4,6 @@
 require_once dirname(__FILE__,3) . '/vendor/PHPMailer/src/Exception.php';
 require_once dirname(__FILE__,3) . '/vendor/PHPMailer/src/PHPMailer.php';
 require_once dirname(__FILE__,3) . '/vendor/PHPMailer/src/SMTP.php';
-require_once dirname(__FILE__,3) . '/src/lib/language.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -23,9 +22,9 @@ class MAIL{
 		"logo" => "https://mailer.com/dist/img/logo.png",
 	]; // Contains the various links required
 
-	public function __construct($smtp = null,$language = 'english'){
+	public function __construct($smtp = null,$languageArray = []){
 		// Setup Language
-		$this->Language = new Language($language);
+		$this->Language = $languageArray;
 
 		// Setup URL
 		if(isset($_SERVER['HTTP_HOST'])){
@@ -79,7 +78,7 @@ class MAIL{
 		$this->Mailer->addAddress($email);
 		$this->Mailer->isHTML(true);
 		$this->Mailer->Subject = $this->Brand.' | Reset your password';
-    $this->Mailer->Body    = $this->URL.'?forgot='.$token.' '.$this->Language->Field['* If you did not request this email, please forward it to your network administrator.'];
+    $this->Mailer->Body    = $this->URL.'?forgot='.$token.' '.$this->Language['* If you did not request this email, please forward it to your network administrator.'];
 		return $this->Mailer->send();
 	}
 

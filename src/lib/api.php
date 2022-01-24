@@ -6,8 +6,11 @@ require_once dirname(__FILE__,3) . '/src/lib/smtp.php';
 
 class API{
 
-  protected $Settings;
-  protected $Language;
+  protected $Settings = [];
+  protected $Language = 'english';
+  protected $Languages = [];
+  protected $Fields = [];
+  protected $Mail;
   protected $Timezones;
   protected $Countries;
   protected $States;
@@ -15,7 +18,7 @@ class API{
   protected $PHPVersion;
   protected $Protocol;
   protected $Domain;
-  protected $Debug;
+  protected $Debug = true;
 
   public function __construct(){
 
@@ -23,6 +26,7 @@ class API{
     ini_set('memory_limit', '2G');
     ini_set('post_max_size', '16G');
     ini_set('upload_max_filesize', '16G');
+    ini_set('max_execution_time','2400');
 
 		// Gathering Server Information
 		$this->PHPVersion=substr(phpversion(),0,3);
@@ -39,7 +43,7 @@ class API{
     }
 
 		// Setup Debug
-		if((isset($this->Settings['debug']))&&($this->Settings['debug'])){ $this->Debug = true; } else { $this->Debug = false; }
+		if((isset($this->Settings['debug']))&&($this->Settings['debug'])){ $this->Debug = true; }
     if($this->Debug){ error_reporting(-1); } else { error_reporting(0); }
 
     // Import Database
@@ -58,19 +62,20 @@ class API{
     $this->Timezones = json_decode(file_get_contents(dirname(__FILE__,3) . '/dist/data/timezones.json'),true);
     $this->Countries = json_decode(file_get_contents(dirname(__FILE__,3) . '/dist/data/countries.json'),true);
     $this->States = json_decode(file_get_contents(dirname(__FILE__,3) . '/dist/data/states.json'),true);
-    $this->Plugins = json_decode(file_get_contents(dirname(__FILE__,3) . '/dist/data/plugins.json'),true);
 
 		// Setup Language
-		if(isset($_COOKIE['language'])){ $language = $_COOKIE['language']; }
-    elseif(isset($this->Settings['language'])){ $language = $this->Settings['language']; }
-		else { $this->Language = 'English'; }
-    $this->Language = json_decode(file_get_contents(dirname(__FILE__,3) . "/dist/language/".$language.".json"),true);
+		if(isset($_COOKIE['language'])){ $this->Language = $_COOKIE['language']; }
+    elseif(isset($this->Settings['language'])){ $this->Language = $this->Settings['language']; }
+    $this->Languages = array_diff(scandir(dirname(__FILE__,3) . "/dist/languages/"), array('.', '..'));
+    foreach($this->Languages as $key => $value){ $this->Languages[$key] = str_replace('.json','',$value); }
+    $this->Fields = json_decode(file_get_contents(dirname(__FILE__,3) . "/dist/languages/".$this->Language.".json"),true);
 
 		// Setup Instance
 		if(isset($this->Settings['timezone'])){ date_default_timezone_set($this->Settings['timezone']); }
 
     // Customize SMTP template
     if(isset($this->Settings['url'],$this->Settings['smtp'],$this->Settings['smtp']['username'],$this->Settings['smtp']['password'],$this->Settings['smtp']['host'],$this->Settings['smtp']['port'],$this->Settings['smtp']['encryption'])){
+      $this->Mail = new MAIL($this->Settings['smtp'],$this->Fields);
       $customization = [
         "logo" => $this->Settings['url']."dist/img/logo.png",
         "support" => $this->Settings['url']."?p=support",
@@ -78,7 +83,7 @@ class API{
         "policy" => $this->Settings['url']."?p=policy"
       ];
       if(is_file(dirname(__FILE__,3).'/dist/img/custom-logo.png')){ $customization['logo'] = $this->Settings['url']."dist/img/custom-logo.png"; }
-      $this->Auth->Mail->Customization($this->Settings['title'],$customization);
+      $this->Mail->Customization($this->Settings['title'],$customization);
     }
   }
 
@@ -97,6 +102,8 @@ class API{
     $init['states'] = $this->States;
     $init['timezones'] = $this->Timezones;
     $init['language'] = $this->Language;
+    $init['languages'] = $this->Languages;
+    $init['fields'] = $this->Fields;
     $init['debug'] = $this->Debug;
     return $init;
   }
@@ -107,8 +114,7 @@ class API{
   		fwrite($json, json_encode($this->DB, JSON_PRETTY_PRINT));
   		fclose($json);
       return true;
-    }
-    catch{ return false;
+    } catch(Exception $error){ return false; }
   }
 
   protected function set(){
@@ -117,7 +123,14 @@ class API{
   		fwrite($json, json_encode($this->Settings, JSON_PRETTY_PRINT));
   		fclose($json);
       return true;
-    }
-    catch{ return false; }
+    } catch(Exception $error){ return false; }
+  }
+
+  public function isInstall(){
+    return is_file(dirname(__FILE__,3).'/config/config.json');
+  }
+
+  public function isLogin(){
+    if(isset($this->Settings) && is_array($this->Settings) && !empty($this->Settings)){ return true; }
   }
 }

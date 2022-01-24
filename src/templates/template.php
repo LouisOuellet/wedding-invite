@@ -7,21 +7,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<?php
-	if(isset($_GET['p'])){ $p = $_GET['p']; } else { $p = $this->Parameters[0]; }
-	if(isset($_GET['v'])){ $v = $_GET['v']; } else { $v = 'index'; }
-	if(isset($_GET['id'])){ $id = $_GET['id']; } else { $id = ''; }
   // Title
-  if($this->Validate()){
-    if((isset($this->Settings['license']))&&((isset($this->LSP->Status))&&($this->LSP->Status))){
-      if(!$this->Auth->isBlacklisted($this->Auth->getClientIP())){
-        if((!isset($this->Settings['maintenance']))||(!$this->Settings['maintenance'])){
-          if($this->Auth->isLogin()){
-            $title = ucwords(str_replace('_',' ',$p));
-          } else { $title = $this->Language->Field['Sign_in']; }
-        } else { $title = $this->Language->Field['Maintenance']; }
-      } else { $title = $this->Language->Field['Blacklisted']; }
-    } else { $title = $this->Language->Field['Activation']; }
-  } else { $title = $this->Language->Field['Installation']; }
+  if($this->isInstall()){
+    if((!isset($this->Settings['maintenance']))||(!$this->Settings['maintenance'])){
+      if($this->isLogin()){
+        $title = $this->Fields['Wedding'];;
+      } else { $title = $this->Fields['Sign in']; }
+    } else { $title = $this->Fields['Maintenance']; }
+  } else { $title = $this->Fields['Installation']; }
 	?>
   <title><?= $title ?></title>
 	<link rel="shortcut icon" href="./dist/img/favicon.ico" />
@@ -77,17 +70,10 @@
   <link rel="stylesheet" href="/dist/css/adminlte.min.css">
   <!-- extended CSS -->
   <link rel="stylesheet" title="default" href="/dist/css/default.css">
-	<!-- plugins CSS -->
-	<?php $plugins = preg_grep('/^([^.])/', scandir(dirname(__FILE__,3).'/plugins/'));
-	foreach($plugins as $plugin){
-		if($plugin != 'empty' && file_exists(dirname(__FILE__,3).'/plugins/'.$plugin.'/dist/css/styles.css')){
-			if((isset($this->Settings['plugins'][$plugin]['status']))&&($this->Settings['plugins'][$plugin]['status'])){ echo '<link rel="stylesheet" href="/plugins/'.$plugin.'/dist/css/styles.css">'; }
-		}
-	} ?>
+  <!-- extended CSS -->
+  <link rel="stylesheet" title="default" href="/dist/css/wedding.css">
   <!-- jQuery -->
   <script src="./vendor/jquery/jquery.min.js"></script>
-  <!-- Popper JS -->
-  <!-- <script src="./vendor/popper/popper.min.js"></script> -->
   <!-- TimeAgo JS -->
   <script src="./vendor/timeago/jquery.timeago.js"></script>
   <!-- Bootstrap 4 -->
@@ -174,67 +160,25 @@
   <script src="./vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
   <!-- dropzonejs -->
   <script src="./vendor/dropzone/min/dropzone.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="./dist/js/adminlte.min.js"></script>
-  <!-- extended CSS -->
-  <script src="./dist/js/framework.js"></script>
+  <!-- whatwg-fetch -->
 	<script>window.fetch = undefined;</script>
   <script src="./vendor/whatwg-fetch/fetch.umd.js"></script>
+  <!-- AdminLTE App -->
+  <script src="./dist/js/adminlte.min.js"></script>
+  <!-- extended JS -->
+  <script src="./dist/js/framework.js"></script>
+  <!-- App JS -->
+  <script src="./dist/js/wedding.js"></script>
 </head>
-<?php
-  $logopng = "logo.png";
-	$pace = "dark";
-	$nav = "warning";
-	$navmode = "light";
-	$logobg = "dark";
-	$sidenav = "primary";
-	$sidenavmode = "light";
-	$darkmode = false;
-	if(isset($this->Settings['customization']['pace']['value'])){ $pace = $this->Settings['customization']['pace']['value']; }
-	if(isset($this->Settings['customization']['nav']['value'])){ $nav = $this->Settings['customization']['nav']['value']; }
-	if(isset($this->Settings['customization']['navmode']['value'])){ $navmode = $this->Settings['customization']['navmode']['value']; }
-	if(isset($this->Settings['customization']['logobg']['value'])){ $logobg = $this->Settings['customization']['logobg']['value']; }
-	if(isset($this->Settings['customization']['sidenav']['value'])){ $sidenav = $this->Settings['customization']['sidenav']['value']; }
-	if(isset($this->Settings['customization']['sidenavmode']['value'])){ $sidenavmode = $this->Settings['customization']['sidenavmode']['value']; }
-	if(isset($this->Settings['customization']['darkmode']['value'])){ $darkmode = $this->Settings['customization']['darkmode']['value']; }
-	if(isset($this->Auth->Options['application']['pace']['value'])){ $pace = $this->Auth->Options['application']['pace']['value']; }
-	if(isset($this->Auth->Options['application']['nav']['value'])){ $nav = $this->Auth->Options['application']['nav']['value']; }
-	if(isset($this->Auth->Options['application']['navmode']['value'])){ $navmode = $this->Auth->Options['application']['navmode']['value']; }
-	if(isset($this->Auth->Options['application']['logobg']['value'])){ $logobg = $this->Auth->Options['application']['logobg']['value']; }
-	if(isset($this->Auth->Options['application']['sidenav']['value'])){ $sidenav = $this->Auth->Options['application']['sidenav']['value']; }
-	if(isset($this->Auth->Options['application']['sidenavmode']['value'])){ $sidenavmode = $this->Auth->Options['application']['sidenavmode']['value']; }
-	if(isset($this->Auth->Options['application']['darkmode']['value'])){ $darkmode = $this->Auth->Options['application']['darkmode']['value']; }
-	if(is_file(dirname(__FILE__,3).'/dist/img/custom-logo.png')){ $logopng = "custom-logo.png"; }
-?>
-<body class="hold-transition sidebar-mini layout-navbar-fixed layout-fixed pace-<?=$pace?> <?php if($darkmode){ echo "dark-mode"; } ?>">
+<body class="hold-transition pace-warning dark-mode content-background">
 	<?php
-  if($this->Validate()){
-		if((isset($this->Settings['license']))&&((isset($this->LSP->Status))&&($this->LSP->Status))){
-			if(!$this->Auth->isBlacklisted($this->Auth->getClientIP())){
-				if((!isset($this->Settings['maintenance']))||(!$this->Settings['maintenance'])){
-          // Compile Auth Errors
-          $this->Error = array_merge($this->Error,$this->Auth->Error);
-					if($this->Auth->isLogin()){
-						require_once dirname(__FILE__,2) . '/templates/layout/default.php';
-            foreach($this->Settings['plugins'] as $plugin => $conf){
-          		if(file_exists(dirname(__FILE__,3).'/plugins/'.$plugin.'/dist/js/script.js')){
-          			if((isset($conf['status']))&&($conf['status'])){ echo '<script src="./plugins/'.$plugin.'/dist/js/script.js"></script>'; }
-          		}
-          	}
-					} else {
-						require_once dirname(__FILE__,2) . '/templates/layout/signin.php';
-					}
-				} else {
-					require_once dirname(__FILE__,2) . '/templates/layout/maintenance.php';
-				}
-			} else {
-				require_once dirname(__FILE__,2) . '/templates/layout/blacklist.php';
-			}
-		} else {
-			require_once dirname(__FILE__,2) . '/templates/layout/activation.php';
-		}
-	} else {
-		require_once dirname(__FILE__,2) . '/templates/layout/install.php';
-	} ?>
+    if($this->isInstall()){
+  		if((!isset($this->Settings['maintenance']))||(!$this->Settings['maintenance'])){
+  			if($this->isLogin()){
+  				require_once dirname(__FILE__,2) . '/templates/layout/default.php';
+  			} else { require_once dirname(__FILE__,2) . '/templates/layout/signin.php'; }
+  		} else { require_once dirname(__FILE__,2) . '/templates/layout/maintenance.php'; }
+  	} else { require_once dirname(__FILE__,2) . '/templates/layout/install.php'; }
+  ?>
 </body>
 </html>

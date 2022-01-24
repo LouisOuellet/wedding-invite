@@ -1,97 +1,121 @@
-<!-- Site wrapper -->
-<div class="wrapper" id="ControlPanel">
-  <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-<?=$navmode?> p-0 navbar-<?=$nav?> elevation-2">
-    <!-- Left navbar links -->
-    <ul id="navbar-left" class="navbar-nav pt-2 pb-2">
-      <li class="nav-item">
-        <a href="#" class="nav-link" data-widget="pushmenu"><i class="fas fa-bars"></i></a>
-      </li>
-    </ul>
-		<div class="collapse navbar-collapse" id="DeskNav1">
-			<ul class="navbar-nav d-inline-flex flex-row pt-2 pb-2"></ul>
-		</div>
-    <!-- Right navbar links -->
-    <ul id="navbar-right" class="navbar-nav d-inline-flex flex-row pt-2 pb-2 ml-auto" style="align-items: flex-start;">
-			<li class="nav-item" style="display:none;">
-				<a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
-					<i class="fas fa-ellipsis-v"></i>
-				</a>
-			</li>
-			<li class="nav-item navbar-toggler border-0" style="border-radius:0px; cursor:pointer; font-size: 1em;" data-toggle="collapse" data-target="#DeskNav1,#DeskNav2">
-				<i class="fas fa-bars pt-2"></i>
-			</li>
-    </ul>
-  </nav>
-  <!-- /.navbar -->
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar elevation-4 sidebar-<?=$sidenavmode?>-<?=$sidenav?>" id="DIVlogo">
-    <!-- Brand Logo -->
-    <a href="<?= $this->URL ?>" class="brand-link elevation-4 navbar-<?=$logobg?> bg-<?=$logobg?>">
-      <img src="/dist/img/<?=$logopng?>"
-           alt="<?= $this->Settings['title'] ?> Logo"
-           class="brand-image"
-           style="opacity: .8;margin-left:5px;">
-      <span class="brand-text font-weight-light"><?= $this->Settings['title'] ?></span>
-    </a>
-    <!-- Sidebar -->
-		<!-- Sidebar Widgets -->
-		<div class="sidebarWidget"></div>
-    <div class="sidebar">
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar nav-flat nav-child-indent flex-column" data-widget="treeview" role="menu" data-accordion="false"></ul>
-      </nav>
-      <!-- /.sidebar-menu -->
+<div class="events-content-wrapper events-background row m-0 align-items-center text-center justify-content-center">
+  <div class="w-auto events-box bg-black noselect" id="events-1" style="display: none;">
+    <h2>Welcome to the wedding of</h2>
+    <p class="mt-4"><button class="btn btn-warning btn-lg mt-4">Enter</button></p>
+  </div>
+  <div class="w-auto events-box bg-black noselect" id="events-2" style="display: none;">
+    <h2>Welcome to the wedding of</h2>
+    <p class="mt-4"><button class="btn btn-warning btn-lg mt-4">Enter</button></p>
+  </div>
+  <div class="events-box pt-0 bg-black noselect hide" id="events-3" style="display: block;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarevents"><i class="fas fa-bars"></i></button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarevents">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link active" data-page="about">About</a>
+          <a class="nav-item nav-link" data-page="gallery">Gallery</a>
+          <a class="nav-item nav-link" data-page="attendance">Attendances</a>
+          <a class="nav-item nav-link" data-page="vows">Vows</a>
+          <a class="nav-item nav-link" data-page="planning">Planning</a>
+          <a class="nav-item nav-link" data-page="menu">Menu</a>
+          <a class="nav-item nav-link" data-page="seating_plan">Seating Plan</a>
+        </div>
+      </div>
+    </nav>
+    <div class="events-pages">
+      <div class="events-page active" data-page="about">
+        <h2>About</h2>
+        <p class="text-justify">
+          Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+        </p>
+        <p class="text-justify">
+          The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+        </p>
+      </div>
+      <div class="events-page hide" data-page="gallery">
+        <h2>Gallery</h2>
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <button class="btn btn-warning btn-lg btn-block" data-action="Download"><i class="fas fa-angle-down mr-1"></i>Download All</button>
+          </div>
+        </div>
+      </div>
+      <div class="events-page hide" data-page="attendance">
+        <h2>Attendances</h2>
+        <p class="text-justify">
+          Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+        </p>
+        <p class="text-justify">
+          The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+        </p>
+      </div>
+      <div class="events-page hide" data-page="vows">
+        <h2>Vows</h2>
+        <p class="text-justify">
+          Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+        </p>
+        <p class="text-justify">
+          The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+        </p>
+      </div>
+      <div class="events-page hide" data-page="planning">
+        <h2>Planning</h2>
+        <ul class="timeline"></ul>
+      </div>
+      <div class="events-page hide" data-page="menu">
+        <h2>Menu</h2>
+        <div class="btn-group btn-block">
+          <button class="btn btn-outline-warning btn-lg active" data-menu="adult">Adulte</button>
+          <button class="btn btn-outline-warning btn-lg" data-menu="kid">Enfant</button>
+        </div>
+        <div class="events-menus mt-4">
+          <div class="events-menu active" data-menu="adult">
+            <h3 style="color: rgb(204, 204, 204);">Bouchées à la volée</h3>
+            <h3>
+              <p style="font-size: 16px;">Station du maraîcher - Légumes de saison en crudités, craquelins maison, hummus et trempettes<br>ou<br>Charcuteries en folies - saucissons bio de Charlevoix, jambon cru, fraises, melons, salade d’herbes</p>
+            </h3>
+            <h3 style="color: rgb(204, 204, 204);">Entrées</h3>
+            <h3>
+              <p style="font-size: 16px;">Tartelette aux légumes grillés - Fromage, tomates, courgettes vinaigrette<br>ou<br>Tomates de Fardoche - Haloumi grillé de St-Robert, pesto du jardin, pousses, crumble à la fleur d’ail</p>
+            </h3>
+            <h3 style="color: rgb(204, 204, 204);">Soupe</h3>
+            <h3>
+              <p style="font-size: 16px;">Crème de courgettes, sumac et herbes fraîches</p>
+            </h3>
+            <h3 style="color: rgb(204, 204, 204);">Résistance</h3>
+            <h3>
+              <p style="font-size: 16px;">Filet de porc sirop-whiskey-piment goria écrasé de pommes de terre à l’ail grillé, lime et gingembre<br>ou<br>Blanc de volaille citron-oregano sauce chimichurri et légumes du marché</p>
+            </h3>
+            <h3 style="color: rgb(204, 204, 204);">Dessert</h3>
+            <h3>
+              <p style="font-size: 16px;">Feuilleté d’été fraises au sirop de mélilot, crème chiboust et fleurs<br>*Café, thé et infusion inclus</p>
+            </h3>
+          </div>
+          <div class="events-menu hide" data-menu="kid">
+            <h3 style="color: rgb(204, 204, 204);">Entrees</h3>
+            <h3>
+              <p style="font-size: 16px;">Soupe, Crème de courgettes, sumac et herbes fraîches</p>
+            </h3>
+            <h3 style="color: rgb(204, 204, 204);">Résistance</h3>
+            <h3>
+              <p style="font-size: 16px;">Pates<br>ou<br>Pizza du chef</p>
+            </h3>
+            <h3 style="color: rgb(204, 204, 204);">Dessert</h3>
+            <h3>
+              <p style="font-size: 16px;">Feuilleté d’été fraises au sirop de mélilot, crème chiboust et fleurs</p>
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div class="events-page hide" data-page="seating_plan">
+        <h2>Seating Plan</h2>
+        <p class="text-justify">
+          Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+        </p>
+        <p class="text-justify">
+          The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+        </p>
+      </div>
     </div>
-    <!-- /.sidebar -->
-  </aside>
-  <!-- Content Wrapper. Contains page content -->
-	<div class="content-wrapper content-background" style="background-image: url('/dist/img/background.png')!important;">
-		<section class="content-header content-background">
-			<div class="container-fluid">
-				<div class="row mb-2" id="page-title">
-					<div class="col-sm-6">
-						<h1><?= ucfirst(str_replace("_"," ",str_replace("."," ",$p))) ?></h1>
-					</div>
-					<?php
-						$href = "?p=$p";
-						if(($v != '')&&($v != 'index')){ $href .= "&v=$v"; }
-						if($id != ''){ $crumbTitle = $id; $href .= "&id=$id"; } else { $crumbTitle = ucfirst($p); }
-					?>
-					<div class="col-sm-6"><ol id="crumbs" class="breadcrumb float-sm-right"><li class="breadcrumb-item"><a href="<?= $href ?>"><i class="icon icon-<?= $p ?> mr-1"></i><?= ucfirst(str_replace("_"," ",str_replace("."," ",$crumbTitle))) ?></a></li></ol></div>
-				</div>
-			</div>
-		</section>
-		<section class="content content-background p-3" id="ContentFrame">
-			<?php
-				$file = "/plugins/$p/src/views/$v.php";
-				if(file_exists(dirname(__FILE__,4).$file)){
-					if(($this->Auth->valid('plugin',$p,1))&&($this->Auth->valid('view',$v,1,$p))){
-						require dirname(__FILE__,4).$file;
-					} else {
-						require dirname(__FILE__,4).'/src/views/403.php';
-					}
-				} else {
-					require dirname(__FILE__,4).'/src/views/404.php';
-				}
-			?>
-		</section>
-	</div>
-  <!-- /.content-wrapper -->
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-		<ul class="nav nav-tabs" role="tablist"></ul>
-		<div class="tab-content"></div>
-  </aside>
-  <!-- /.control-sidebar -->
-  <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b><?= $this->Language->Field['Version'] ?></b> <?= $this->Settings['version'] ?> <b><?= $this->Language->Field['Build'] ?></b> <?= $this->Settings['build'] ?>
-    </div>
-    <strong><?= $this->Language->Field['Copyright']." &copy; 2019-".date("Y")." " ?><a href="<?= $this->Settings['credit_url'] ?>"><?= $this->Settings['credit'] ?></a></strong> <?= $this->Language->Field['All_rights_reserved'] ?>. <a href="<?= $this->URL ?>">End-user license agreement</a>
-  </footer>
+  </div>
 </div>
-<script>
-	$(function(){ API.Plugins.init(); });
-</script>

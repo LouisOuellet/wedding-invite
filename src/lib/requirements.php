@@ -8,12 +8,6 @@ if (!extension_loaded('intl')) {
 if (!extension_loaded('mbstring')) {
   trigger_error('You must enable the mbstring extension to use this Application.' . PHP_EOL, E_USER_ERROR);
 }
-if (!extension_loaded('ldap')) {
-  trigger_error('You must enable the ldap extension to use this Application.' . PHP_EOL, E_USER_ERROR);
-}
-if (!extension_loaded('mysqlnd')) {
-  trigger_error('You must enable the mysqlnd extension to use this Application.' . PHP_EOL, E_USER_ERROR);
-}
 if (!extension_loaded('imap')) {
   trigger_error('You must enable the imap extension to use this Application.' . PHP_EOL, E_USER_ERROR);
 }

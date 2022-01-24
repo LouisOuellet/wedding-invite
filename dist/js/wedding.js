@@ -1,4 +1,5 @@
-API.Plugins.events = {
+API.wedding = {
+	init:function(){},
 	load:{
 		page:function(){
 			$('div.wrapper').hide();
@@ -1017,4 +1018,4 @@ API.Plugins.events = {
 	},
 }
 
-API.Plugins.events.init();
+API.wedding.init();
