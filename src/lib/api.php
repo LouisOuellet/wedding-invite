@@ -55,7 +55,7 @@ class API{
 		if(isset($_SERVER['HTTP_HOST']) && !isset($this->Settings['url'])){
 			$this->Settings['url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http")."://";
 			$this->Settings['url'] .= $_SERVER['HTTP_HOST'].'/';
-      if(file_exists(dirname(__FILE__,3).'/config/config.json')){ $this->SaveCfg($this->Settings); }
+      if(file_exists(dirname(__FILE__,3).'/config/config.json')){ $this->set($this->Settings); }
 		}
 
 		//Import Listings
